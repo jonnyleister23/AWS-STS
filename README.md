@@ -9,41 +9,15 @@ I also used Terraform to manage the IAM roles, policies, trust relationships, S3
 ## Architecture
 
 ```text
-                    ACCOUNT A
-              ┌──────────────────┐
-              │  Lambda Function │
-              │                  │
-              │ Gets current ISS │
-              │ location from API│
-              └────────┬─────────┘
-                       │
-                       │ Uses execution role
-                       ▼
-              ┌──────────────────┐
-              │ Lambda Execution │
-              │      Role        │
-              └────────┬─────────┘
-                       │
-                       │ sts:AssumeRole
-                       ▼
-                    AWS STS
-                       │
-                       │ Temporary credentials
-                       ▼
-                    ACCOUNT B
-              ┌──────────────────┐
-              │ CrossAccountS3   │
-              │    WriteRole     │
-              └────────┬─────────┘
-                       │
-                       │ s3:PutObject
-                       ▼
-              ┌──────────────────┐
-              │    S3 Bucket     │
-              │                  │
-              │ ISS location     │
-              │ JSON objects     │
-              └──────────────────┘
+ISS API
+   ↓
+Lambda (Account A)
+   ↓
+STS AssumeRole
+   ↓
+IAM Role (Account B)
+   ↓
+S3 Bucket (Account B)
 ```
 
 ## How It Works
