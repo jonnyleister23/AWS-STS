@@ -1,0 +1,26 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+
+# Terraform variable files that may contain private values
+*.tfvars
+*.tfvars.json
+
+# AWS / credentials
+.aws/
+credentials
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+Desktop.ini
